@@ -4,7 +4,7 @@ import './App.css';
 import Nav from './Nav'
 import Home from './Home'
 import About from './About'
-import Video from './Video'
+// import Video from './Video'
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/about' element={<About />} />
-          <Route path='/video/:id' element={<Video />} />
+          {/* <Route path='/video/:id' element={<Video />} /> */}
         </Routes>
       </Router>
     </div>
