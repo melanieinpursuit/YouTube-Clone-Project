@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react"
 import { getAllVideos } from "./fetch"
 import ErrorMessage from "./errorMessage"
+import "./Home.css"
 
 export default function Home () {
    const [videos, setVideos] = useState({})
-   const [input, setInput]= useState('')
-   const [searchError, setSearchError]= useState(false)
+   const [input, setInput] = useState('')
+   const [searchError, setSearchError] = useState(false)
    
 
    function filterVideos(search, videos) {
@@ -17,48 +18,43 @@ export default function Home () {
 
    function handleChange (e) {
     const title = e.target.value;
-    const result = title.length ? filterVideos(title,videos):videos
+    // const result = title.length ? filterVideos(title,videos):videos
     setInput(title)
-    setVideos(result)
+    // setVideos(result)
    }
     
-   useEffect(()=>{
-    getAllVideos()
-        .then((res)=>{
-            setVideos(res)
-        })
-        .catch((error)=> {
-            console.log(error);
-            setSearchError(true)
-        })
-   })
+//    useEffect(()=>{
+//    
+//         .catch((error)=> {
+//             console.log(error);
+//             setSearchError(true)
+//         })
+//    }, [])
     return (
         <div>
-            { searchError ?(
+            { searchError ? (
                     
                  <>  
                   <ErrorMessage/>
-                 <label htmlFor="searchBar">
-                 Search:
-                 <input
-                 type="text"
-                //  value={input}
-                //  id="input"
-                //  onChange={handleChange}
-                 >
-                 </input>
-                 <button
-                 type="submit">
-                     Search
-                 </button>
-             </label></>
-               
-                   
-                
-
+                </>
                 ):(
-                  
-                <label> Hello</label>  
+                    <label htmlFor="searchBar" className="searchLabel">
+                    Search: 
+                    <input
+                    type="text"
+                    value={input}
+                    id="input"
+                    onChange={handleChange}
+                    >
+                    </input>
+
+                    <button
+                    type="submit"
+                    id="searchButton"
+                    onSubmit={getAllVideos}>
+                        Search
+                    </button>
+                </label> 
                 )
             }
            
