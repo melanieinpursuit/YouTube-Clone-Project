@@ -1,28 +1,52 @@
 import { useEffect, useState } from "react"
-import { getAllVideos } from "./fetch"
+
 import ErrorMessage from "./errorMessage"
 import "./Home.css"
 
+
+const URL = process.env.REACT_APP_API_BASE_URL
+const key2 = process.env.REACT_APP_API_KEY_2
+
+
+
+
+function filterVideos(search, videos) {
+ return videos.filter((video) => {
+     // console.log(video.items.snippet.title)
+      return video.items.snippet.title.toLowerCase().match(search.toLowerCase())
+ })
+}
+
 export default function Home () {
-   const [videos, setVideos] = useState({})
+   const [videos, setVideos] = useState([])
    const [input, setInput] = useState('')
    const [searchError, setSearchError] = useState(false)
    
-
-   function filterVideos(search, videos) {
-    return videos.filter((video) => {
-        // console.log(video.items.snippet.title)
-         return video.items.snippet.title.toLowerCase().match(search.toLowerCase())
-    })
-   }
-
+   
+   function getAllVideos (title) {
+    const url = `${URL}?&maxResults=20&order=relevance&q=${title}&part=snippet&key=${key2}`
+    return fetch(url)
+    .then((res) => 
+    {return res.json()});
+}
    function handleChange (e) {
+    // e.preventDefault()
     const title = e.target.value;
-    // const result = title.length ? filterVideos(title,videos):videos
     setInput(title)
-    // setVideos(result)
-   }
     
+   }
+
+   function handleSubmit (){
+
+   }
+
+   // setup a form 
+   // then put an onsubmit in the form element 
+   //create a handle submit function
+   //prevent default then you can call get all videos funtion
+   // at the end of the fetch need to do another .then to get the result 
+   // can use line 17 setVideos to set the state
+
 //    useEffect(()=>{
 //    
 //         .catch((error)=> {
@@ -34,12 +58,14 @@ export default function Home () {
         <div>
             { searchError ? (
                     
-                 <>  
+                <>  
                   <ErrorMessage/>
                 </>
                 ):(
+                    
                     <label htmlFor="searchBar" className="searchLabel">
                     Search: 
+                    <form> 
                     <input
                     type="text"
                     value={input}
@@ -51,9 +77,10 @@ export default function Home () {
                     <button
                     type="submit"
                     id="searchButton"
-                    onSubmit={getAllVideos}>
+                    onSubmit={getAllVideos(input)}>
                         Search
                     </button>
+                    </form>
                 </label> 
                 )
             }
