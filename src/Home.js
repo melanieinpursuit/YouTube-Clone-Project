@@ -24,14 +24,22 @@ export default function Home () {
    
    
    function getAllVideos () {
-    const url = `${URL}?&maxResults=20&order=relevance&q=${input}&part=snippet&key=${key2}`
-    console.log(url)
-    return fetch(url)
-    .then((res) => 
-     res.json()
-    );
-  
-}
+        const url = `${URL}?maxResults=20&order=relevance&q=${input}&part=snippet&key=${key2}`
+        console.log(url)
+        fetch(url)
+        .then((res) => 
+            res.json()
+        )
+        .then((res) => {
+            console.log(res)
+            setVideos(res.items)
+        }); 
+    }
+
+    useEffect(()=>{
+
+    },[])
+
 
    function handleChange (e) {
     const title = e.target.value;
@@ -40,8 +48,8 @@ export default function Home () {
 
    function handleSubmit (e) {
     e.preventDefault()
-getAllVideos()
-   setVideos("")
+    getAllVideos()
+    setVideos("")
     setInput("")
 }
 
@@ -61,7 +69,7 @@ getAllVideos()
                 ):(
                     <label htmlFor="searchBar" className="searchLabel">
                     Search: 
-                        <form> 
+                        <form onSubmit={handleSubmit}> 
                             <input
                             type="text"
                             value={input}
@@ -73,14 +81,23 @@ getAllVideos()
                             <button
                             type="submit"
                             id="searchButton"
-                            onSubmit={getAllVideos}>
+                            >
                             Search
                             </button>
                         </form>
                 </label> 
                 )
             }
-           
+           {
+            videos && videos.map((eachVideo) => {
+                return (
+                    <div>
+                    <img src={eachVideo.snippet.thumbnails.default.url} alt="thumbnail" />
+                    <h4>{eachVideo.snippet.title}</h4>
+                </div>
+                )
+            })
+           }
         </div>
     )
 }
