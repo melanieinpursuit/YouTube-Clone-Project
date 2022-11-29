@@ -25,7 +25,7 @@ export default function Home () {
     const [videos, setVideos] = useState([])
     const [input, setInput] = useState('')
     const [searchError, setSearchError] = useState(false)
-    
+
    function getAllVideos () {
         const url = `${URL}?maxResults=20&order=relevance&q=${input}&part=snippet&key=${key2}`
         console.log(url)
@@ -64,15 +64,17 @@ export default function Home () {
    // can use line 17 setVideos to set the state
 
     return (
-        <div>
+        <div className="grad">
             { searchError ? (
                 <>  
                   <ErrorMessage/>
                 </>
                 ):(
                     <label htmlFor="searchBar" className="searchLabel">
-                    Search: 
-                        <form onSubmit={handleSubmit}> 
+                        <p></p>
+                    Search For A Video: 
+                        <form onSubmit={handleSubmit}>
+                            <p></p> 
                             <input
                             type="text"
                             value={input}
@@ -80,13 +82,14 @@ export default function Home () {
                             onChange={handleChange}
                             >
                             </input>
-
+                            <p></p>
                             <button
                             type="submit"
                             id="searchButton"
                             >
                             Search
                             </button>
+                            <p></p>
                         </form>
                 </label> 
                 )
@@ -94,10 +97,10 @@ export default function Home () {
            {
             videos && videos.map((eachVideo) => {
                 return (
-                <div>
+                <div className="results">
                     <img src={eachVideo.snippet.thumbnails.default.url} alt="thumbnail" />
                     <Link to= {`/video/${eachVideo.id.videoId}`}>
-            <h4>{eachVideo.snippet.title}</h4></Link>
+                    <li className="videoTitles">{eachVideo.snippet.title}</li></Link>
                 </div>
                 )
             })

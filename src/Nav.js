@@ -8,10 +8,10 @@ export default function Nav () {
         <header>
             <article className='nav'>
                 <Link to="/">
-                <h1>Home</h1>
+                <h1 className='homeLink'>Home</h1>
                 </Link>
                 <Link to="/about">
-                <h1>About</h1>
+                <h1 className='aboutLink'>About</h1>
                 </Link>
             </article>
         </header>

@@ -15,7 +15,6 @@ import { input , key2} from './Home'
 // create const for options 
 function Video() {
     const { id } = useParams()
-    const getOneVideo = `${URL}/video/:id`
 
     const opts = {
         videoId: id,

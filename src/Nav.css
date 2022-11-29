@@ -1,0 +1,31 @@
+header {
+    background-color: #fff3b0;
+    padding: 15px;
+    border-bottom: 3px solid #5f0f40;;
+}
+
+.homeLink {
+    display: inline-block;
+    grid-template-columns: 100px 50px 100px;
+    grid-template-rows: 80px auto 80px; 
+    gap: 15px 10px;
+    margin: 10px;
+    transition: 0.4s;
+}
+
+.homeLink:hover {
+    color: darkcyan;
+}
+
+.aboutLink {
+    display: inline-block;
+    grid-template-columns: 100px 50px 100px;
+    grid-template-rows: 80px auto 80px; 
+    gap: 15px 10px;
+    margin: 10px;
+    transition: 0.4s;
+}
+
+.aboutLink:hover {
+    color: darkcyan;
+}
