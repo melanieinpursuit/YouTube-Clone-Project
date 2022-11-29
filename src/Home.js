@@ -28,7 +28,6 @@ export default function Home () {
 
    function getAllVideos () {
         const url = `${URL}?maxResults=20&order=relevance&q=${input}&part=snippet&key=${key2}`
-        console.log(url)
         fetch(url)
         .then((res) => 
             res.json()
