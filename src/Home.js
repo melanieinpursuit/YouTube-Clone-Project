@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react"
+import {Link} from "react-router-dom"
 
 import ErrorMessage from "./errorMessage"
 import "./Home.css"
+
+
 
 
 const URL = process.env.REACT_APP_API_BASE_URL
@@ -14,15 +17,15 @@ function filterVideos(search, videos) {
  return videos.filter((video) => {
      // console.log(video.items.snippet.title)
       return video.items.snippet.title.toLowerCase().match(search.toLowerCase())
- })
+    })
 }
 
 export default function Home () {
-   const [videos, setVideos] = useState([])
-   const [input, setInput] = useState('')
-   const [searchError, setSearchError] = useState(false)
    
-   
+    const [videos, setVideos] = useState([])
+    const [input, setInput] = useState('')
+    const [searchError, setSearchError] = useState(false)
+    
    function getAllVideos () {
         const url = `${URL}?maxResults=20&order=relevance&q=${input}&part=snippet&key=${key2}`
         console.log(url)
@@ -91,9 +94,10 @@ export default function Home () {
            {
             videos && videos.map((eachVideo) => {
                 return (
-                    <div>
+                <div>
                     <img src={eachVideo.snippet.thumbnails.default.url} alt="thumbnail" />
-                    <h4>{eachVideo.snippet.title}</h4>
+                    <Link to= {`/video/${eachVideo.id.videoId}`}>
+            <h4>{eachVideo.snippet.title}</h4></Link>
                 </div>
                 )
             })
